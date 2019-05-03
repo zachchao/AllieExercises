@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Exercise 3</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+
+@import url('https://fonts.googleapis.com/css?family=Gugi|Just+Another+Hand|Poppins|Roboto+Mono');
+div{
+    margin-top: 70px;
+    margin-bottom: 70px;
+    margin-right: 150px;
+    margin-left: 80px;
+    color: gainsboro;
+}
+
+#clock {
+  font-family: Gugi;
+  font-size: 80px;
+}
+#switch {
+  font-family: Poppins;
+}
+
+body {
+  background-color: #ff9d00;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg stroke='%23000' stroke-width='66.7' stroke-opacity='0.05' %3E%3Ccircle fill='%23ff9d00' cx='0' cy='0' r='1800'/%3E%3Ccircle fill='%23fb8d17' cx='0' cy='0' r='1700'/%3E%3Ccircle fill='%23f47d24' cx='0' cy='0' r='1600'/%3E%3Ccircle fill='%23ed6e2d' cx='0' cy='0' r='1500'/%3E%3Ccircle fill='%23e35f34' cx='0' cy='0' r='1400'/%3E%3Ccircle fill='%23d85239' cx='0' cy='0' r='1300'/%3E%3Ccircle fill='%23cc453e' cx='0' cy='0' r='1200'/%3E%3Ccircle fill='%23be3941' cx='0' cy='0' r='1100'/%3E%3Ccircle fill='%23b02f43' cx='0' cy='0' r='1000'/%3E%3Ccircle fill='%23a02644' cx='0' cy='0' r='900'/%3E%3Ccircle fill='%23901e44' cx='0' cy='0' r='800'/%3E%3Ccircle fill='%23801843' cx='0' cy='0' r='700'/%3E%3Ccircle fill='%236f1341' cx='0' cy='0' r='600'/%3E%3Ccircle fill='%235e0f3d' cx='0' cy='0' r='500'/%3E%3Ccircle fill='%234e0c38' cx='0' cy='0' r='400'/%3E%3Ccircle fill='%233e0933' cx='0' cy='0' r='300'/%3E%3Ccircle fill='%232e062c' cx='0' cy='0' r='200'/%3E%3Ccircle fill='%23210024' cx='0' cy='0' r='100'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+button {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  margin-right: 150px;
+  margin-left: 80px;
+}
+
+.btn-default{
+  background-color: white;
+}
+
+</style>
+<script>
+
+f=ampm;
+let t = setInterval(update, 50);
+
+function milt() {
+  console.log("milt " + f)
+  let today = new Date();
+  let h = today.getHours();
+  let m = today.getMinutes();
+  let s = today.getSeconds();
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById('clock').innerHTML =
+  h + ":" + m + ":" + s;
+  document.getElementById('switch').innerHTML =
+  "Display in AM/PM";
+}
+
+function ampm() {
+  console.log("ampm " + f)
+  let today = new Date();
+  let h = today.getHours();
+  let m = today.getMinutes();
+  let s = today.getSeconds();
+  let a = "AM";
+  m = checkTime(m);
+  s = checkTime(s);
+  h = checkHr(h);
+  document.getElementById('clock').innerHTML =
+  h + ":" + m + ":" + s + " " + a;
+  document.getElementById('switch').innerHTML =
+  "Display in Military Time";
+}
+
+function swap(){
+  if(f==milt){
+    f=ampm;
+  }else{
+    f=milt;
+  }
+}
+
+function update(){
+  f();
+}
+
+function checkTime(i) {
+  if (i < 10) {
+    i = "0" + i
+  };  // add zero in front of numbers < 10
+  return i;
+}
+
+function checkHr(j) {
+  if (0<j<11) {
+    a = "AM";  
+    return j;
+  }else if(j==0){
+    a = "AM";
+    return j + 12;
+  }else{
+    a = "PM";
+    return j - 12;    
+  }
+}
+</script>
+</head>
+
+<body>
+<center>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-offset-3 container col-sm-3 col-sm-offset-3" id="clock">.col-sm-3</div>
+  </div>
+</div>
+</center> 
+<div class="container-fluid">
+    <div class="row">
+      <button class="col-sm-offset-3 container col-lg-3 col-sm-offset-3 btn btn-default" id="switch" type="button" onclick=swap()>Display in Military Time</button>
+    </div>
+  </div>
+<br><br><br>
+
+</body>
