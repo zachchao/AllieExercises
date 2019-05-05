@@ -48,29 +48,28 @@ let t = setInterval(update, 50);
 
 function milt() {
   console.log("milt " + f)
-  let today = new Date();
-  let h = today.getHours();
-  let m = today.getMinutes();
-  let s = today.getSeconds();
-  h = checkTime(h);
-  m = checkTime(m);
-  s = checkTime(s);
-  document.getElementById('clock').innerHTML =
-  h + ":" + m + ":" + s;
+  a = "";
+  // document.getElementById('clock').innerHTML =
+  // h + ":" + m + ":" + s;
+  calcTime();
+  display();
   document.getElementById('switch').innerHTML =
   "Display in AM/PM";
+  console.log(h);
 }
 
 function ampm() {
   console.log("ampm " + f)
   //Calculates what to display
-  let today = new Date();
-  let h = today.getHours();
-  let m = today.getMinutes();
-  let s = today.getSeconds();
+  // let today = new Date();
+  // let h = today.getHours();
+  // let m = today.getMinutes();
+  // let s = today.getSeconds();
+  calcTime();
+  display();
   let a = "AM";
-  m = checkTime(m);
-  s = checkTime(s);
+  // m = checkTime(m);
+  // s = checkTime(s);
   h = checkHr(h);
   // Displays it
   document.getElementById('clock').innerHTML =
@@ -78,6 +77,22 @@ function ampm() {
   document.getElementById('switch').innerHTML =
   "Display in Military Time";
 }
+
+function calcTime() {
+  let today = new Date();
+  let h = today.getHours();
+  let m = today.getMinutes();
+  let s = today.getSeconds();
+  //h = checkTime(h);
+  m = checkTime(m);
+  s = checkTime(s);
+}
+
+function display() {
+  document.getElementById('clock').innerHTML =
+  h + ":" + m + ":" + s + " " + a;
+}
+
 
 function swap(){
   if(f==milt){
@@ -127,7 +142,7 @@ function countdown() {
   countdownMin = checkTime(parseInt(countdownMin));
   countdownSec = checkTime(parseInt(countdownSec));
   
-  if(countdownMin==0 & countdownSec ==0) {
+  if(countdownMin==0 & countdownSec==0) {
     alarmSound();
   }
 
