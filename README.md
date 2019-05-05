@@ -107,6 +107,7 @@ We will now add functionality to our alarm list. Cycling through it.
 ### Requirements
 - Add a new variable called `currentIndex` which begins at zero. The count down and alarm function will use the JSON object at the `currentIndex`. Each time the alarm ends, increment the `currentIndex` and if you implemented everything right it should cycle through the list of alarms.
 - Change the color of the component currently running in the alarm list so it is clear which alarm we are on currently. You may find this difficult without some special logic.
+- It is also possible to do this using a FIFO data structure such as a queue but it is overkill and would actually be more difficult.
 
 
 ## Exercise 3.07 - Adding a remove button
