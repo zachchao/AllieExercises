@@ -71,18 +71,42 @@ At the moment our alarm only works for two minutes and only once. We will now au
 
 
 ## Exercise 3.05 - Alarm List
+At the moment we can only add one alarm. We will now display a list of alarms. 
 
 ### Things to look up and use
 - Document.createElement
 - element.appendChild
 
 ### Requirements
+- Modify your form so that instead of setting a variable to a JSON object, hold a list of JSON objects and simply add to that list. The list should look something like 
+```
+[
+	{
+		"alarmName" : "Study",
+		"alarmMinutes" : 25,
+		"alarmSound" : "option 1"
+	},
+	{
+		"alarmName" : "Break",
+		"alarmMinutes" : 5,
+		"alarmSound" : "option 2"
+	}
+]
+```
+- Create a new div above the add alarm button which opens the modal, using `Document.createElement` and `element.appendChild`, add a component of your choosing to display each alarm. 
+- These changes can remain cosmetic for now as your next task will be to implement using this list into your loop.
+- You are done when every time you input the form you successfully add to both the list of JSON objects as well as visually see the alarm in 
 
 
 ## Exercise 3.06 - Putting it all together
+We will now add functionality to our alarm list. Cycling through it.
 
 ### Things to look up and use
+- (Just for fun if you want to) FIFO Queue
+
 ### Requirements
+- Add a new variable called `currentIndex` which begins at zero. The count down and alarm function will use the JSON object at the `currentIndex`. Each time the alarm ends, increment the `currentIndex` and if you implemented everything right it should cycle through the list of alarms.
+- Change the color of the component currently running in the alarm list so it is clear which alarm we are on currently. You may find this difficult without some special logic.
 
 
 ## Exercise 3.07 - Adding a remove button
