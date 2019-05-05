@@ -11,11 +11,11 @@ def home():
 
 @app.route('/exercise3-02')
 def exercise3_02():
-	return render_template('exercise3a.html')
+	return render_template('exercise3-02.html')
 
 @app.route('/exercise3-03')
 def exercise_03():
-	return render_template('exercise3b.html')
+	return render_template('exercise3-03.html')
 
 @app.errorhandler(404)
 def page_not_found(e):

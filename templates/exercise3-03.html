@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Exercise 3</title>
+<title>Exercise 3.03</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <style>
 
@@ -42,7 +42,7 @@ button {
 
 </style>
 <script>
-
+var end = 0;
 f=ampm;
 let t = setInterval(update, 50);
 
@@ -52,6 +52,7 @@ function milt() {
   let h = today.getHours();
   let m = today.getMinutes();
   let s = today.getSeconds();
+  h = checkTime(h);
   m = checkTime(m);
   s = checkTime(s);
   document.getElementById('clock').innerHTML =
@@ -62,6 +63,7 @@ function milt() {
 
 function ampm() {
   console.log("ampm " + f)
+  //Calculates what to display
   let today = new Date();
   let h = today.getHours();
   let m = today.getMinutes();
@@ -70,6 +72,7 @@ function ampm() {
   m = checkTime(m);
   s = checkTime(s);
   h = checkHr(h);
+  // Displays it
   document.getElementById('clock').innerHTML =
   h + ":" + m + ":" + s + " " + a;
   document.getElementById('switch').innerHTML =
@@ -107,6 +110,45 @@ function checkHr(j) {
     return j - 12;    
   }
 }
+  
+function f1() {
+  var countdownTime = 0.1 * 60 * 1000;
+  f = countdown;
+  end = Date.now() + countdownTime; 
+  console.log("start" + end);
+}
+
+
+function countdown() {
+  let now = Date.now(); 
+  x = (end - now)/1000; // in milliseconds
+  let countdownMin = x/60; 
+  let countdownSec = x%60; 
+  countdownMin = checkTime(parseInt(countdownMin));
+  countdownSec = checkTime(parseInt(countdownSec));
+  
+  if(countdownMin==0 & countdownSec ==0) {
+    alarmSound();
+  }
+
+  if(x<=0) {
+    countdownMin = "00";
+    countdownSec = "00";
+  }
+
+  document.getElementById('clock').innerHTML =
+  "00" + ":" + countdownMin + ":" + countdownSec;
+  console.log(now);
+
+}
+
+function alarmSound() {
+
+  var bell = document.getElementById("bellSound");
+  bell.play();
+
+}
+
 </script>
 </head>
 
@@ -114,15 +156,23 @@ function checkHr(j) {
 <center>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-offset-3 container col-sm-3 col-sm-offset-3" id="clock">.col-sm-3</div>
+    <div class="col-sm-offset-6 container col-sm-6 col-sm-offset-6" id="clock"></div>
   </div>
 </div>
 </center> 
+
 <div class="container-fluid">
-    <div class="row">
-      <button class="col-sm-offset-3 container col-lg-3 col-sm-offset-3 btn btn-default" id="switch" type="button" onclick=swap()>Display in Military Time</button>
-    </div>
-  </div>
+  <div class="row">
+    <button class="col-sm-offset-3 container col-lg-3 col-sm-offset-3 btn btn-default" id="switch" type="button" onclick=swap()>Display in Military Time</button>
+    <button class="col-sm-offset-3 container col-lg-3 col-sm-offset-3 btn btn-default" id="timer" type="button" onclick=f1()>Start Countdown</button>
+    <audio id="bellSound">
+      <source src="https://www.soundjay.com/misc/bell-ringing-03.wav" type="audio/wav">
+      <source src="https://www.soundjay.com/misc/bell-ringing-03.mp3" type="audio/mpeg">
+    </audio>
+   </div>
+</div>
+
+
 <br><br><br>
 
-</body>
+</body>;
