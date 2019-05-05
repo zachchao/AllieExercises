@@ -52,13 +52,22 @@ We will now begin adding an alarm to our clock. Make a new button which, when pr
 - Do not use the smoke alarm as I hate the sound and anyone who does so **WILL** receive a failing grade.
 
 
-## Exercise 3.04 - User Input
+## Exercise 3.04 - User Input And Looping
+At the moment our alarm only works for two minutes and only once. We will now augment it to take in a user's input and loop as well as introducing you to JSON. You will be using Bootstrap's modal to take in the input, storing the input in a JSON object then triggering the alarm and running the alarm in a loop.
 
 ### Things to look up and use
 - Bootstrap Modal
-- Forms
+- HTML Forms
 - JSON
+
 ### Requirements
+- Using Bootstrap's grid system, split the page into different sections, whether it be vertically or horizontally there should be one part of the page which contains everything you have previously created and a new part which will contain nothing.
+- You must use the Bootstrap modal to take in user input, trigger it with a button within the new section of the page you just created. 
+- The form should take in the alarm's name, sound to play, and the amount of time to play it, you decide on minutes or seconds or both as well as any other parameters you deem necessary. Store all of this information within a JSON object in a variable.
+- The form should be formatted nicely and use Bootstraps form components to look good!
+- Change your count down function to depend on the new JSON object you have created
+- Make a new function which simply plays the alarm sound for x amount of calls to the setInterval then stops the alarm sound and changes the function back to the count down. It should alternate between the two functions, displaying the count down and playing the alarm.
+- Make sure to change the alarm sound depending on the option the user picks!
 
 
 ## Exercise 3.05 - Alarm List
@@ -66,6 +75,7 @@ We will now begin adding an alarm to our clock. Make a new button which, when pr
 ### Things to look up and use
 - Document.createElement
 - element.appendChild
+
 ### Requirements
 
 
