@@ -51,7 +51,7 @@ function milt() {
   console.log("milt " + f);
   var milTime = calcTime();
   a = "";
-  checkedHour = checkHr(milTime[0]);
+  h = milTime[0]
   m = milTime[1];
   s = milTime[2];
   display(h, m, s, a);
@@ -78,7 +78,7 @@ function calcTime() {
   let h = today.getHours();
   let m = today.getMinutes();
   let s = today.getSeconds();
-  //h = checkTime(h);
+  h = checkTime(h);
   m = checkTime(m);
   s = checkTime(s);
   return [h, m, s];
@@ -110,7 +110,8 @@ function checkTime(i) {
 }
 
 function checkHr(j) {
-  if (0<j<=11) {
+  console.log(j);
+  if (0<j && j<=11) {
     // a = "AM";  
     console.log(1);
     return ["AM", j];
