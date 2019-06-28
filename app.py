@@ -17,6 +17,10 @@ def exercise3_02():
 def exercise_03():
 	return render_template('exercise3-03.html')
 
+@app.route('/exercise3-04')
+def exercise_04():
+	return render_template('exercise3-04.html')
+
 @app.errorhandler(404)
 def page_not_found(e):
     # note that we set the 404 status explicitly

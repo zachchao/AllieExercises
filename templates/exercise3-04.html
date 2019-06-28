@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Exercise 3.04</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css?family=Gugi|Just+Another+Hand|Poppins|Roboto+Mono');
+
+
+
+#clock {
+  font-family: Gugi;
+  font-size: 60px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  margin-right: 0px;
+  margin-left: 0px; 
+  color: gainsboro;
+}
+
+#switch {
+  font-family: Poppins;
+}
+
+body {
+  background-color: #ff9d00;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg stroke='%23000' stroke-width='66.7' stroke-opacity='0.05' %3E%3Ccircle fill='%23ff9d00' cx='0' cy='0' r='1800'/%3E%3Ccircle fill='%23fb8d17' cx='0' cy='0' r='1700'/%3E%3Ccircle fill='%23f47d24' cx='0' cy='0' r='1600'/%3E%3Ccircle fill='%23ed6e2d' cx='0' cy='0' r='1500'/%3E%3Ccircle fill='%23e35f34' cx='0' cy='0' r='1400'/%3E%3Ccircle fill='%23d85239' cx='0' cy='0' r='1300'/%3E%3Ccircle fill='%23cc453e' cx='0' cy='0' r='1200'/%3E%3Ccircle fill='%23be3941' cx='0' cy='0' r='1100'/%3E%3Ccircle fill='%23b02f43' cx='0' cy='0' r='1000'/%3E%3Ccircle fill='%23a02644' cx='0' cy='0' r='900'/%3E%3Ccircle fill='%23901e44' cx='0' cy='0' r='800'/%3E%3Ccircle fill='%23801843' cx='0' cy='0' r='700'/%3E%3Ccircle fill='%236f1341' cx='0' cy='0' r='600'/%3E%3Ccircle fill='%235e0f3d' cx='0' cy='0' r='500'/%3E%3Ccircle fill='%234e0c38' cx='0' cy='0' r='400'/%3E%3Ccircle fill='%233e0933' cx='0' cy='0' r='300'/%3E%3Ccircle fill='%232e062c' cx='0' cy='0' r='200'/%3E%3Ccircle fill='%23210024' cx='0' cy='0' r='100'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.btn-default{
+  background-color: white;
+}
+
+.modal{
+  margin: 0;
+}
+
+.modal-content{
+  margin: 0;
+}
+
+</style>
+<script>
+var end = 0;
+var a = "";
+f=ampm;
+let t = setInterval(update, 50);
+
+function milt() {
+  console.log("milt " + f);
+  var milTime = calcTime();
+  a = "";
+  h = milTime[0]
+  m = milTime[1];
+  s = milTime[2];
+  display(h, m, s, a);
+  document.getElementById('switch').innerHTML =
+  "Display in AM/PM";
+}
+
+function ampm() {
+  console.log("ampm " + f);
+  a = "AM";
+  var time = calcTime();
+  checkedHour = checkHr(time[0]);
+  a = checkedHour[0];
+  h = checkTime(checkedHour[1]);
+  m = time[1];
+  s = time[2];
+  display(h, m, s, a);
+  document.getElementById('switch').innerHTML =
+  "Display in Military Time";
+}
+
+function calcTime() {
+  let today = new Date();
+  let h = today.getHours();
+  let m = today.getMinutes();
+  let s = today.getSeconds();
+  m = checkTime(m);
+  s = checkTime(s);
+  return [h, m, s];
+}
+
+function display(h, m, s, a) {
+  document.getElementById('clock').innerHTML =
+  h + ":" + m + ":" + s + " " + a;
+}
+
+
+function swap(){
+  if(f==milt){
+    f=ampm;
+  }else{
+    f=milt;
+  }
+}
+
+function update(){
+  f();
+}
+
+function checkTime(i) {
+  if (i < 10) {
+    i = "0" + i
+  };  // add zero in front of numbers < 10
+  return i;
+}
+
+function checkHr(j) {
+  console.log(j);
+  if (0<j && j<=11) {
+    // a = "AM";  
+    console.log(1);
+    return ["AM", j];
+  }else if(j==0){
+    // a = "AM";
+    console.log(2);
+    return ["AM", j + 12];
+  }else if(j==12){
+    return ["PM", j]
+  }else{ 
+    // a = "PM";
+    console.log(3);
+    return ["PM", j - 12];    
+  }
+}
+  
+function f1() {
+  var countdownTime = 0.1 * 60 * 1000;
+  f = countdown;
+  end = Date.now() + countdownTime; 
+  console.log("start" + end);
+}
+
+
+function countdown() {
+  let now = Date.now(); 
+  x = (end - now)/1000; // in milliseconds
+  let countdownMin = x/60; 
+  let countdownSec = x%60; 
+  countdownMin = checkTime(parseInt(countdownMin));
+  countdownSec = checkTime(parseInt(countdownSec));
+  
+  if(countdownMin==0 & countdownSec==0) {
+    alarmSound();
+  }
+
+  if(x<=0) {
+    countdownMin = "00";
+    countdownSec = "00";
+  }
+
+  document.getElementById('clock').innerHTML =
+  "00" + ":" + countdownMin + ":" + countdownSec;
+  console.log(now);
+
+}
+
+function alarmSound() {
+
+  var bell = document.getElementById("bellSound");
+  bell.play();
+
+}
+
+</script> 
+
+<body>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <center>
+    <div class="container-fluid">
+      <div class="row">
+        <div class=" container col-8" id="clock"></div>
+        <div class=" container col-4" id="something"></div>
+      </div><div class = "row">
+         <div class=" container col-2" id="something"></div>
+         <button class="container col-4 btn btn-default btn-lg" id="switch" type="button" onclick=swap()>Display in Military Time</button> 
+         <div class=" container col-2" id="something"></div>
+
+
+         <div class=" container col-1" id="something"></div>
+         <button type="button" class="container col-2 btn btn-warning btn-lg" data-toggle="modal" data-backdrop="false" data-target="#timerModal">Set Timer 
+         </button>
+
+         <div class=" container col-1" id="something"></div>
+      </div><div class = "row">
+
+        <div class=" container col-2" id="something"></div>
+        <button class="col-offset-4 container col-4 btn btn-default btn-lg" id="timer" type="button" onclick=f1()>Start Countdown</button><div class="col-offset-4 container col-4" id="es"></div>
+
+        <div class=" container col-2" id="something"></div>
+      </div>
+    </div>
+  </center> 
+
+
+ 
+
+  </div>
+  <audio id="bellSound">
+    <source src="https://www.soundjay.com/misc/bell-ringing-03.wav" type="audio/wav">
+    <source src="https://www.soundjay.com/misc/bell-ringing-03.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="modal fade" id="timerModal" role="dialog" aria-labelledby="timerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="timerModalLabel">Add Alarm(s)</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+        
+          <form class="was-validated">
+            <div class="form-group">
+              <input type="text" class="form-control is-invalid" id="alarmName"  placeholder="Enter Alarm Name">
+            </div>
+            <div class="invalid-feedback">
+            Please enter a name for the alarm.
+            </div>
+            <div class="form-group">
+              <input type="number" class="form-control" id="alarmTime" placeholder="Time" min="0">
+              <small id="timerNote" class="form-text text-muted">Please input time in minutes.</small>
+            </div>
+            <label for="selectSound">Select Alarm Sound</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input type="radio" aria-label="Radio button for following text input" name="alarmSound">
+                </div>
+              </div>
+              <div type="text" class="form-control" aria-label="Text input with radio button" >Bells</div>
+              <br>
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input type="radio" aria-label="Radio button for following text input" name="alarmSound">
+                </div>
+              </div>
+              <div type="text" class="form-control" aria-label="Text input with radio button">Chimes</div>
+
+            </div>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Add</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>;
